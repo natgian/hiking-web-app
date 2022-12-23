@@ -1,0 +1,57 @@
+<div class="container-fluid p-0">
+  <nav class="navbar sticky-top navbar-dark navbar-expand-lg">
+    <div class="container mt-2">
+
+      <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="logo" id="logo-img"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        <ul class="navbar-nav text-center ms-auto">
+          <li>
+            <a class="nav-link links underline" href="/search">Explore</a>
+          </li>
+          <li>
+            <a class="nav-link links underline" href="/information">Information</a>
+          </li>
+          <li>
+            <a class="nav-link links underline" href="/hikes/new">Contribute</a>
+          </li>
+          <li>
+            <a class="nav-link links underline" href="/contact">Contact</a>
+          </li>
+          <% if(!loggedInUser) {%>
+          <li>
+            <a  class="nav-link links underline" id="signup" href="/register">Sign Up</a>
+          </li>
+          <% } %>
+        </ul>
+
+        <ul class="navbar-nav text-center ms-auto">
+          <% if(!loggedInUser) {%>
+          <li>
+            <button type="button" class="btn btn-sm btn-success btn-block"><a href="/login"
+                class="nav-link btn-link">Login&nbsp;&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></button>
+          </li>
+          <% } else { %>
+          <div class="d-grid gap-3 d-lg-flex justify-content-sm-center">
+            <li>
+              <button type="button" class="btn btn-sm btn-success">
+                <a class="nav-link btn-link" href="/myprofile"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;My Profile</a>
+              </button>
+            </li>
+
+            <li class="full-width">
+              <button type="button" class="btn btn-sm btn-secondary"><a href="/logout"
+                  class="nav-link btn-link">Logout&nbsp;&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></button>
+            </li>
+          </div>
+          <% } %>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+</div>

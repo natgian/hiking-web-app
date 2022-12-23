@@ -1,0 +1,157 @@
+<% layout("./layouts/boilerplate") %>
+
+<div class="container-fluid">
+  <div class="row | mt-5 p-5 | bg-light-section">
+    <h2 class="text-center mb-5">Make your changes:</h2>
+    <div class="col-md-6 offset-md-3">
+      <form action="/hikes/<%=hike._id%>?_method=PUT" method="POST" novalidate class="needs-validation"
+        enctype="multipart/form-data">
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label class="form-label" for="title">Title:</label>
+          <input class="form-control" type="text" id="title" name="hike[title]" value="<%=hike.title%>" autofocus
+            required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-3">
+          <label class="form-label" for="location">Starting Location:</label>
+          <input class="form-control" type="text" id="location" name="hike[location]" value="<%=hike.location%>"
+            required>
+          <div class="invalid-feedback">Please add a location</div>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="finish">Ending Location:</label>
+          <input class="form-control" type="text" id="finish" name="hike[finish]" value="<%=hike.finish%>" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <!-- Difficulty -->
+        <div class="mb-3">
+          <label class="form-label" for="difficulty">Difficulty (T1-T6):</label>
+          <select class="form-select" type="string" id="difficulty" name="hike[difficulty]"
+            value="<%=hike.difficulty%>">
+            <option value="<%=hike.difficulty%>"><%=hike.difficulty%></option>
+            <option value="-">-</option>
+            <option value="T1 (hiking trail)">T1 (hiking trail)</option>
+            <option value="T2 (mountaineering trail)">T2 (mountaineering trail)</option>
+            <option value="T3 (demanding mountaineering trail)">T3 (demanding mountaineering trail)</option>
+            <option value="T4 (alpine hiking trail)">T4 (alpine hiking trail)</option>
+            <option value="T5 (demanding alpine hiking trail)">T5 (demanding alpine hiking trail)</option>
+            <option value="T6 (advanced alpine hiking trail)">T6 (advanced alpine hiking trail)</option>
+          </select>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <!-- Distance -->
+        <div class="mb-3">
+          <label class="form-label" for="distance">Distance (in kilometres):</label>
+          <div class="input-group">
+            <input class="form-control" type="text" id="distance" name="hike[distance]" value="<%=hike.distance%>"
+              required>
+            <div class="input-group-text">km</div>
+          </div>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <!-- Duration -->
+        <div class="mb-3">
+          <label class="form-label" for="duration">Average Duration:</label>
+          <div class="input-group">
+            <input class="form-control" type="text" id="duration" name="hike[duration]" value="<%=hike.duration%>"
+              required>
+            <div class="input-group-text">hours</div>
+          </div>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <!-- Ascent -->
+        <div class="mb-3">
+          <label class="form-label" for="ascent">Ascent &#9650; (elevation metres) :</label>
+          <div class="input-group">
+            <input class="form-control" type="number" id="ascent" name="hike[ascent]" min="1" value="<%=hike.ascent%>"
+              required>
+            <div class="input-group-text">m</div>
+          </div>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <!-- Descent -->
+        <div class="mb-3">
+          <label class="form-label" for="descent">Descent &#9660; (elevation metres):</label>
+          <div class="input-group">
+            <input class="form-control" type="number" id="descent" name="hike[descent]" min="1"
+              value="<%=hike.descent%>" required>
+            <div class="input-group-text">m</div>
+          </div>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label class="form-label" for="description">Description:</label>
+          <textarea class="form-control" type="text" id="description" name="hike[description]" rows="5"
+            required><%=hike.description%></textarea>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <!-- Add Image(s) -->
+        <div class="mb-1">
+          <label for="image" class="form-label">Add Image(s):</label>
+          <div class="form-file custom-file">
+            <input class="form-control custom-file-input" type="file" id="image" name="image" multiple>
+            <label for="image" class="form-label custom-file-label"></label>
+          </div>
+          <div id="formFile"></div>
+        </div>
+
+        <div class="container mb-5">
+          <div class="row">
+            <p>Current Image(s):</p>
+            <% hike.images.forEach(function(img, i) { %>
+
+            <div class="col-4">
+              <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="" crossorigin>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="image-<%=i%>" name="deleteImages[]"
+                  value="<%=img.filename%>">
+                <label class="form-check-label" for="image-<%=i%>">Delete?</label>
+              </div>
+            </div>
+
+            <% }) %>
+          </div>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between">
+          <button class="btn btn-success">Save changes</button>
+          <a href="/hikes/<%=hike._id%>">Go back</a>
+        </div>
+
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+<script src="/javascripts/selectedImageThumbnail.js"></script>

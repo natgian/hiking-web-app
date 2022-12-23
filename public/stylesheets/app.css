@@ -1,0 +1,298 @@
+/*------ */
+/* RESET */
+/*------ */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/*--------*/
+/* GLOBAL */
+/*--------*/
+
+body {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("/images/bgMountains.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#explore {
+  margin: 0;
+  padding: 0;
+}
+
+
+/*-----------------*/
+/* UTILITY CLASSES */
+/*-----------------*/
+
+.bg-dark-section {
+  background-color: black;
+}
+
+.bg-light-section {
+  background-color: white;
+}
+
+.text-muted {
+  color: #5a6269!important;
+}
+
+.inactive {
+  display: none;
+}
+
+.inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+#scrollToTopBtn {
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+  background-color: #1b8653;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.875rem;
+}
+
+/*--------*/
+/* HEADER */
+/*--------*/
+
+.heading {
+  margin: 4rem 0;
+}
+
+.header-text1 {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 600;
+}
+.header-text2 {
+  color: #1b8653;
+  font-size: 3rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.lead {
+  color: white;
+}
+
+
+/*---------------------*/
+/* NAVIGATION & FOOTER */
+/*---------------------*/
+
+.underline[aria-current="page"]{
+  border-bottom: 2px solid #1b8653;
+}
+
+.navbar {
+  background: #000;
+}
+
+.navbar-nav {
+  margin-bottom: 1rem;
+}
+
+.links {
+  color: white;
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0 1rem;
+}
+
+.btn-link {
+  color: white;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0;;
+}
+
+
+/*--------*/
+/* IMAGES */
+/*--------*/
+
+/* Images Upload Preview */
+#logo-img {
+  height: 125px;
+}
+
+#formFile {
+  display: flex;
+  overflow: scroll;
+}
+
+#formFile img {
+  width: 100px;
+  height: 75px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0, 2);
+  opacity: 85%;
+  padding: 0 0.5rem;
+}
+
+/* Index Page Images */
+.index-images {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Show Page Images */
+#hikeCarousel .carousel-item img {
+  object-fit: contain;
+  object-position: center;
+  height: 70vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Info Page Images */
+div .info-img {
+  max-width: 20%;
+}
+
+/*-------*/
+/* CARDS */
+/*-------*/
+
+.card {
+  border: none;
+}
+.index-card {
+  height: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: all ease-in 0.3s;
+}
+
+.index-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.show-card {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+legend {
+  font-size: 1.2rem;
+}
+
+/*------*/
+/* MAPS */
+/*------*/
+
+#cluster-map {
+  width: 100%;
+  height: 50vh;
+}
+
+#map {
+  width: 100%;
+  height: 30vh;
+}
+
+#fit {
+  position: relative;
+  top: 1rem;
+  z-index: 1;
+}
+
+/*---------------*/
+/* MEDIA QUERIES */
+/*---------------*/
+
+@media (max-width: 991.98px) {
+  .heading {
+    margin: 1rem 0;
+  }
+  .header-text1 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .header-text2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  .lead {
+    font-size: 0.875rem;
+    color: white;
+  }
+  .underline[aria-current="page"] {
+   color: #1b8653;
+    border-bottom: none;
+  }
+  #cluster-map {
+    width: 100%;
+    height: 40vh;
+  }
+  #hikeCarousel .carousel-item img {
+    height: 50vh;
+  }
+}
+
+@media (min-width: 991.98px) and (max-width: 1199px) {
+  .btn-link {
+    font-size: 0.875rem;
+  }
+  .links {
+    font-size: 0.875rem;
+  }
+}

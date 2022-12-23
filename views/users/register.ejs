@@ -1,0 +1,40 @@
+<% layout("./layouts/boilerplate") %>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+  <div class="row flex-fill mb-5 mt-5">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title mt-4 mb-4 h1 text-center mb-5">Sign Up</h5>
+          <form action="/register" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="username">Username:</label>
+              <input class="form-control" type="text" id="username" name="username" autofocus required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="email">Email:</label>
+              <input class="form-control" type="email" id="email" name="email" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label" for="password">Password:</label>
+              <input class="form-control" type="password" id="password" name="password" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-success btn-block">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
