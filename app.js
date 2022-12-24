@@ -34,7 +34,7 @@ const bookmarkRoutes = require("./routes/bookmarks");
 main().catch(err => console.log(err));
 async function main() {
   await mongoose.connect(dbUrl);
-  console.log("MONGO CONNECTION OPEN!")
+  console.log("DATABASE CONNECTED!")
 };
 
 // setting up ejs-mate
@@ -204,6 +204,7 @@ app.use((err, req, res, next) => {
 });
 
 // Server
-app.listen(3000, () => {
-  console.log("APP IS LISTENING ON PORT 3000!");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`APP SERVING ON PORT ${port}!`);
 });
