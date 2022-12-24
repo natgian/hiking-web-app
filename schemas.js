@@ -1,4 +1,4 @@
-const BaseJoi = require("Joi");
+const BaseJoi = require("joi");
 const sanitizeHtml = require("sanitize-html");
 
 // SANITIZING HTML WITH JOI - defining an extension on joy.string called escapeHTML:
