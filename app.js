@@ -130,7 +130,7 @@ const connectSrcUrls = [
 ];
 const fontSrcUrls = [
   "https://fonts.gstatic.com",
-  "https://ka-f.fontawesome.com",
+  "https://ka-f.fontawesome.com/",
 ];
 
 app.use(
