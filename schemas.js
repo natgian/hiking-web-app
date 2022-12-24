@@ -34,7 +34,7 @@ module.exports.hikeSchema = Joi.object({
     distance: Joi.number().min(1).required(),
     location: Joi.string().required().escapeHTML(),
     finish: Joi.string().required().escapeHTML(),
-    images: Joi.string().required(),
+    images: Joi.string(),
     duration: Joi.number().required(),
     difficulty: Joi.string().required().escapeHTML(),
     ascent: Joi.number().required(),
