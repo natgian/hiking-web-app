@@ -97,7 +97,7 @@ const scriptSrcUrls = [
   "https://api.tiles.mapbox.com/",
   "https://api.mapbox.com/",
   "https://kit.fontawesome.com/",
-  "https://ka-f.fontawesome.com",
+  "https://ka-f.fontawesome.com/",
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net",
   "https://res.cloudinary.com/natgian/",
