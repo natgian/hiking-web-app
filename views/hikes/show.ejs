@@ -78,11 +78,9 @@
 
         <% if(loggedInUser && hike.author.equals(loggedInUser._id) || loggedInUser && loggedInUser.isAdmin) { %>
         <div class="mb-3">
-          <a href="/hikes/<%=hike._id%>/edit" class="card-link btn btn-sm btn-outline-primary"><i
-              class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Edit</a>
+          <a href="/hikes/<%=hike._id%>/edit" class="card-link btn btn-sm btn-outline-primary"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0l-30.1 30l97.9 97.9l30.1-30.1c21.9-21.9 21.9-57.3 0-79.2l-18.7-18.6zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.8 15.7-7.4 21.9-13.5l167.3-167.4l-98-98l-167.3 167.4zM96 64c-53 0-96 43-96 96v256c0 53 43 96 96 96h256c53 0 96-43 96-96v-96c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg> Edit</a>
           <form class="d-inline" action="/hikes/<%=hike._id%>?_method=DELETE" method="POST">
-            <button class="btn btn-sm btn-outline-danger align-self-center"><i
-                class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</button>
+            <button class="btn btn-sm btn-outline-danger align-self-center"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 448 512"><path fill="currentColor" d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0h120.4c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64s14.3-32 32-32h96l7.2-14.3zM32 128h384v320c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg> Delete</button>
           </form>
         </div>
         <% } %>
@@ -93,8 +91,7 @@
 
           <!-- ADD TO BOOKMARKS -->
           <form action="/hikes/<%=hike._id%>/bookmarks" method="POST" novalidate>
-            <button type="submit" id="bookmark" class="btn btn-info btn-sm"><i id="icon"
-                class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;Add to bookmarks</button>
+            <button type="submit" id="bookmark" class="btn btn-sm btn-warning"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;" width="0.75em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 384 512"><path fill="currentColor" d="M336 0H48C21.49 0 0 21.49 0 48v431.9c0 24.7 26.79 40.08 48.12 27.64L192 423.6l143.9 83.93c21.3 11.57 48.1-2.93 48.1-27.63V48c0-26.51-21.5-48-48-48zm0 452l-144-84l-144 84V54c0-3.37 2.63-6 5.1-6h276c4.3 0 6.9 2.63 6.9 6v398z"/></svg> Bookmark</button>
           </form>
             
           <!-- ADD A REVIEW -->
@@ -126,10 +123,8 @@
           </form>
 
           <% } else { %>
-          <a class="btn btn-info btn-sm" href="/login?returnTo=/hikes/<%= hike._id %>"><i id="icon"
-              class="fa-regular fa-bookmark"></i>&nbsp;&nbsp;Bookmark</a>
-          <a href="/login?returnTo=/hikes/<%= hike._id %>" class="btn btn-sm btn-success"><i
-              class="fa-solid fa-star"></i>&nbsp;&nbsp;Leave a review</a>
+          <a class="btn btn-sm btn-warning" href="/login?returnTo=/hikes/<%= hike._id %>"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;" width="0.75em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 384 512"><path fill="currentColor" d="M336 0H48C21.49 0 0 21.49 0 48v431.9c0 24.7 26.79 40.08 48.12 27.64L192 423.6l143.9 83.93c21.3 11.57 48.1-2.93 48.1-27.63V48c0-26.51-21.5-48-48-48zm0 452l-144-84l-144 84V54c0-3.37 2.63-6 5.1-6h276c4.3 0 6.9 2.63 6.9 6v398z"/></svg> Bookmark</a>
+          <a href="/login?returnTo=/hikes/<%= hike._id %>" class="btn btn-sm btn-info"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;" width="1.13em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 576 512"><path fill="currentColor" d="M287.9 0c9.2 0 17.6 5.25 21.6 13.52l68.6 141.28l153.3 22.7c9 1.3 16.4 7.6 19.3 16.2c2.8 8.7.5 18.2-5.9 24.5L433.6 328.4l26.3 155.5c1.5 9-2.2 18.2-9.7 23.5c-7.4 5.3-18.1 6-25.3 1.7l-137-73.2l-137.8 73.2c-7.2 4.3-17 3.6-24.5-1.7c-7.4-5.3-11.1-14.5-10.5-23.5l27.1-155.5L31.11 218.2c-6.46-6.3-8.75-15.8-5.91-24.5c2.83-8.6 10.3-14.9 19.29-16.2l153.21-22.7l68.6-141.28C270.4 5.249 278.7 0 287.9 0zm0 78.95L235.4 187.2c-3.5 7.1-10.3 12.1-18.1 13.3L98.98 217.9L184.9 303c5.5 5.5 8 13.4 6.7 21.1l-20.2 119.6l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2l-20.2-119.6c-1.3-7.7 1.3-15.6 6.8-21.1l85.9-85.1l-118.3-17.4c-7.9-1.2-14.7-6.2-18.1-13.3L287.9 78.95z"/></svg> Leave a review</a>
           <% } %>
         </div>
       </div>
@@ -139,8 +134,6 @@
     <div class="col-sm-12 col-md-6">
       <!-- Map -->
       <div class="mb-5" id="map"></div>
-
-
 
       <div class="col-sm-12 col-md-6 mb-5">
         <!-- OTHER USER'S REVIEWS -->
@@ -162,7 +155,7 @@
             <!--Authorized User-->
             <% if(loggedInUser && review.author.equals(loggedInUser._id) || loggedInUser && loggedInUser.isAdmin) { %>
             <form action="/hikes/<%=hike._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-              <button class="btn btn-sm btn-outline-danger">Delete</button>
+              <button class="btn btn-sm btn-outline-danger mt-2"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 448 512"><path fill="currentColor" d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0h120.4c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64s14.3-32 32-32h96l7.2-14.3zM32 128h384v320c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg> Delete</button>
             </form>
             <% } %>
           </div>

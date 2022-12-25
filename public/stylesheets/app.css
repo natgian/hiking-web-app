@@ -48,7 +48,6 @@ img,
 picture,
 svg {
   max-width: 100%;
-  display: block;
 }
 
 /*--------*/
@@ -70,7 +69,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 /*-----------------*/
 /* UTILITY CLASSES */
@@ -99,6 +97,7 @@ body {
 
 
 #scrollToTopBtn {
+  z-index: 1;
   position: fixed;
   right: 2em;
   bottom: 2em;
