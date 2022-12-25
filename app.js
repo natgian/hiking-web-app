@@ -111,7 +111,7 @@ const styleSrcUrls = [
   "https://api.tiles.mapbox.com/",
   "https://fonts.googleapis.com/",
   "https://use.fontawesome.com/",
-  "https://ka-f.fontawesome.com",
+  "https://ka-f.fontawesome.com/",
   "https://res.cloudinary.com/natgian/",
   "https://cdn.jsdelivr.net/",
   "https://fonts.googleapis.com",
@@ -124,7 +124,7 @@ const connectSrcUrls = [
   "https://events.mapbox.com/",
   "https://res.cloudinary.com/natgian/",
   "https://images.unsplash.com/",
-  "https://ka-f.fontawesome.com",
+  "https://ka-f.fontawesome.com/",
   "https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js.map",
   "https://formspree.io/f/maykawwn"
 ];
