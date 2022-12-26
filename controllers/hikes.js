@@ -29,7 +29,7 @@ module.exports.index = async (req, res) => {
   }
   else {
     const hikes = await Hike.find({});
-    res.render("index", { hikes, title: "Explore | Switzerland Explored", page_name: "index" });
+    res.render("index", { hikes, title: "Switzerland Explored", page_name: "index" });
   }
 };
 
