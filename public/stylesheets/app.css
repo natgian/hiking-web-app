@@ -204,6 +204,11 @@ body {
   background: #000;
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgb(0, 0, 0, 1);
+}
+
 /* Info Page Images */
 div .info-img {
   max-width: 20%;
