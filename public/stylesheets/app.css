@@ -95,6 +95,14 @@ body {
   vertical-align: middle;
 }
 
+.flex {
+  display: flex;
+}
+
+.center {
+  margin: auto;
+}
+
 
 #scrollToTopBtn {
   z-index: 1;
