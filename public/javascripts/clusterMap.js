@@ -7,8 +7,15 @@ container: 'cluster-map',
 // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
 style: 'mapbox://styles/mapbox/light-v10',
 center: [8.2275, 46.8182],
-zoom: 6,
+zoom: 7,
 });
+
+const mq = window.matchMedia( "(min-width: 990px)" );
+if (mq.matches){
+    map.setZoom(7); //set map zoom level for desktop size
+} else {
+    map.setZoom(6); //set map zoom level for mobile size
+};
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());

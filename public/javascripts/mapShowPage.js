@@ -7,6 +7,14 @@ const map = new mapboxgl.Map({
   zoom: 6, // starting zoom
 });
 
+var mq = window.matchMedia( "(min-width: 990px)" );
+
+if (mq.matches){
+    map.setZoom(6); //set map zoom level for desktop size
+} else {
+    map.setZoom(5); //set map zoom level for mobile size
+};
+
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
