@@ -299,7 +299,7 @@ legend {
     color: white;
   }
   .explainer {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .underline[aria-current="page"] {
    color: #1b8653;
@@ -313,7 +313,7 @@ legend {
     height: 50vh;
   }
   #search {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 }
 
