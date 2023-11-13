@@ -33,10 +33,11 @@ const userRoutes = require("./routes/users");
 const bookmarkRoutes = require("./routes/bookmarks");
 
 // connecting to MongoDB
+mongoose.set('strictQuery', false);
 main().catch(err => console.log(err));
 async function main() {
   await mongoose.connect(dbUrl);
-  console.log("DATABASE CONNECTED!")
+  console.log("DATABASE CONNECTED!");
 };
 
 // setting up ejs-mate
@@ -190,6 +191,10 @@ app.get("/information", (req, res) => {
 // - Contact -
 app.get("/contact", (req, res) => {
   res.render("contact", {title: "Contact | Switzerland Explored", page_name: "contact"});
+});
+// - Privacy Policy - 
+app.get("/privacypolicy", (req, res) => {
+  res.render("privacypolicy", {title: "Privacy Policy | Switzerland Explored", page_name: "privacypolicy"});
 });
 
 // 404 PAGE NOT FOUND HANDLER (all = for every request / * = for every path)

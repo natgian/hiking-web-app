@@ -70,13 +70,15 @@
     </div>
     <% } %>
 
-
+   
   <script>
     const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
     const hikes = { features: <%-JSON.stringify(hikes) %> }
   </script>
 
-  
+
 
   <script src="/javascripts/clusterMap.js"></script>
   <script src="/javascripts/scrollToTop.js"></script>
+
+  <script src="/javascripts/cookies.js"></script>

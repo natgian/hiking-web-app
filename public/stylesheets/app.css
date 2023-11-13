@@ -58,7 +58,7 @@ body {
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("/images/bgMountains.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
@@ -83,7 +83,7 @@ body {
 }
 
 .text-muted {
-  color: #5a6269!important;
+  color: #5a6269 !important;
 }
 
 .inactive {
@@ -130,6 +130,7 @@ body {
   font-size: 3.5rem;
   font-weight: 600;
 }
+
 .header-text2 {
   color: #26c377;
   font-size: 3rem;
@@ -151,12 +152,45 @@ body {
   font-size: 1rem;
 }
 
+/*----------------*/
+/* PRIVACY POLICY */
+/*----------------*/
+
+.cookie-wrapper {
+  background-color: aqua;
+}
+
+.agree-btn {
+  border: 1px solid black;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0.625em;
+  margin: 0 1em;
+  border-radius: 10px;
+}
+
+.cookies {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  margin: 1.25em auto 0 auto;
+}
+
+#cookies {
+  width: 100%;
+  display: none;
+}
+
 
 /*---------------------*/
 /* NAVIGATION & FOOTER */
 /*---------------------*/
 
-.underline[aria-current="page"]{
+.underline[aria-current="page"] {
   border-bottom: 2px solid #1b8653;
 }
 
@@ -179,7 +213,8 @@ body {
   color: white;
   font-size: 1rem;
   font-weight: 300;
-  padding: 0;;
+  padding: 0;
+  ;
 }
 
 
@@ -239,6 +274,7 @@ div .info-img {
 .card {
   border: none;
 }
+
 .index-card {
   height: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -286,32 +322,40 @@ legend {
   .heading {
     margin: 1rem 0;
   }
+
   .header-text1 {
     font-size: 2rem;
     font-weight: 600;
   }
+
   .header-text2 {
     font-size: 2rem;
     font-weight: 700;
   }
+
   .lead {
     font-size: 0.875rem;
     color: white;
   }
+
   .explainer {
     font-size: 1rem;
   }
+
   .underline[aria-current="page"] {
-   color: #1b8653;
+    color: #1b8653;
     border-bottom: none;
   }
+
   #cluster-map {
     width: 100%;
     height: 40vh;
   }
+
   #hikeCarousel .carousel-item img {
     height: 50vh;
   }
+
   #search {
     font-size: 1rem;
   }
@@ -321,9 +365,11 @@ legend {
   .btn-link {
     font-size: 0.875rem;
   }
+
   .links {
     font-size: 0.875rem;
   }
+
   #search {
     font-size: 1rem;
   }
