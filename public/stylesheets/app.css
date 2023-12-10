@@ -318,6 +318,13 @@ legend {
 /* MEDIA QUERIES */
 /*---------------*/
 
+@media (max-width: 768px) {
+  body {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("/images/bgMountains_small.jpg") no-repeat center center fixed;
+  }
+}
+
 @media (max-width: 991.98px) {
   .heading {
     margin: 1rem 0;
@@ -374,3 +381,4 @@ legend {
     font-size: 1rem;
   }
 }
+
