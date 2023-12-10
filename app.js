@@ -152,7 +152,8 @@ app.use(
               "https://res.cloudinary.com/natgian/",
               "https://images.unsplash.com/",
           ],
-          fontSrc: ["'self'", ...fontSrcUrls]       
+          fontSrc: ["'self'", ...fontSrcUrls],
+          manifestSrc: ["'self'"]       
       }
   })
 );
