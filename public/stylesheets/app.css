@@ -318,6 +318,12 @@ legend {
 /* MEDIA QUERIES */
 /*---------------*/
 
+@media (max-width: 600px) {
+  body {
+    background: hsl(150, 67%, 5%);
+  }
+}
+
 @media (max-width: 991.98px) {
   .heading {
     margin: 1rem 0;
