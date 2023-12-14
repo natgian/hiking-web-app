@@ -7,10 +7,14 @@
       <h1 class="mb-5">Create a new trail</h1>
       <form action="/hikes" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
 
+        <% if (error) { %>
+          <p><%= error %></p>
+        <% } %>
+
         <!-- Title -->
         <div class="mb-3">
           <label class="form-label" for="title">Title:</label>
-          <input class="form-control" type="text" id="title" name="hike[title]" autofocus required>
+          <input class="form-control" type="text" id="title" name="hike[title]" autofocus required value="<%= formData && formData.hike && formData.hike.title ? formData.hike.title : '' %>">
           <div class="invalid-feedback">Please add a title</div>
           <div class="valid-feedback">
             Looks good!
@@ -21,7 +25,7 @@
         <div class="mb-3">
           <label class="form-label" for="location">Starting Location:</label>
           <input class="form-control" type="text" id="location" name="hike[location]"
-            placeholder="e.g. Kandersteg, Bern" required>
+            placeholder="e.g. Kandersteg, Bern" required value="<%= formData && formData.hike && formData.hike.location ? formData.hike.location : '' %>">
           <div class="invalid-feedback">Please add a location</div>
           <div class="valid-feedback">
             Looks good!
@@ -31,7 +35,7 @@
         <div class="mb-3">
           <label class="form-label" for="finish">Ending Location:</label>
           <input class="form-control" type="text" id="finish" name="hike[finish]" placeholder="e.g. Kandersteg, Bern"
-            required>
+            required value="<%= formData && formData.hike && formData.hike.finish ? formData.hike.finish : '' %>">
           <div class="invalid-feedback">Please add a location</div>
           <div class="valid-feedback">
             Looks good!
@@ -43,12 +47,12 @@
           <label class="form-label" for="difficulty">Difficulty (T1-T6):</label>
           <select class="form-select" type="string" id="difficulty" name="hike[difficulty]" required>
             <option value="-"></option>
-            <option value="T1 (hiking trail)">T1 (hiking trail)</option>
-            <option value="T2 (mountaineering trail)">T2 (mountaineering trail)</option>
-            <option value="T3 (demanding mountaineering trail)">T3 (demanding mountaineering trail)</option>
-            <option value="T4 (alpine hiking trail)">T4 (alpine hiking trail)</option>
-            <option value="T5 (demanding alpine hiking trail)">T5 (demanding alpine hiking trail)</option>
-            <option value="T6 (advanced alpine hiking trail)">T6 (advanced alpine hiking trail)</option>
+            <option value="T1 (hiking trail)"<%= formData && formData.hike && formData.hike.difficulty === 'T1 (hiking trail)' ? ' selected' : '' %>>T1 (hiking trail)</option>
+            <option value="T2 (mountaineering trail)"<%= formData && formData.hike && formData.hike.difficulty === 'T2 (mountaineering trail)' ? ' selected' : '' %>>T2 (mountaineering trail)</option>
+            <option value="T3 (demanding mountaineering trail)"<%= formData && formData.hike && formData.hike.difficulty === 'T3 (demanding mountaineering trail)' ? ' selected' : '' %>>T3 (demanding mountaineering trail)</option>
+            <option value="T4 (alpine hiking trail)"<%= formData && formData.hike && formData.hike.difficulty === 'T4 (alpine hiking trail)' ? ' selected' : '' %>>T4 (alpine hiking trail)</option>
+            <option value="T5 (demanding alpine hiking trail)"<%= formData && formData.hike && formData.hike.difficulty === 'T5 (demanding alpine hiking trail)' ? ' selected' : '' %>>T5 (demanding alpine hiking trail)</option>
+            <option value="T6 (advanced alpine hiking trail)"<%= formData && formData.hike && formData.hike.difficulty === 'T6 (advanced alpine hiking trail)' ? ' selected' : '' %>>T6 (advanced alpine hiking trail)</option>
           </select>
           <div class="valid-feedback">
             Looks good!
@@ -59,7 +63,7 @@
         <div class="mb-3">
           <label class="form-label" for="distance">Distance (in kilometres):</label>
           <div class="input-group">
-            <input class="form-control" type="text" id="distance" name="hike[distance]" required>
+            <input class="form-control" type="number" id="distance" name="hike[distance]" required value="<%= formData && formData.hike && formData.hike.distance ? formData.hike.distance : '' %>">
             <div class="input-group-text">km</div>
           </div>
           <div class="valid-feedback">
@@ -71,7 +75,7 @@
         <div class="mb-3">
           <label class="form-label" for="duration">Average Duration:</label>
           <div class="input-group">
-            <input class="form-control" type="text" id="duration" name="hike[duration]" required>
+            <input class="form-control" type="text" id="duration" name="hike[duration]" required value="<%= formData && formData.hike && formData.hike.duration ? formData.hike.duration : '' %>">
             <div class="input-group-text">hours</div>
           </div>
           <div class="valid-feedback">Looks good!</div>
@@ -81,7 +85,7 @@
         <div class="mb-3">
           <label class="form-label" for="ascent">Ascent &#9650; (elevation metres) :</label>
           <div class="input-group">
-            <input class="form-control" type="number" id="ascent" name="hike[ascent]" min="1" required>
+            <input class="form-control" type="number" id="ascent" name="hike[ascent]" min="1" required value="<%= formData && formData.hike && formData.hike.ascent ? formData.hike.ascent : '' %>">
             <div class="input-group-text">m</div>
           </div>
           <div class="valid-feedback">Looks good!</div>
@@ -91,7 +95,7 @@
         <div class="mb-3">
           <label class="form-label" for="descent">Descent &#9660; (elevation metres):</label>
           <div class="input-group">
-            <input class="form-control" type="number" id="descent" name="hike[descent]" min="1" required>
+            <input class="form-control" type="number" id="descent" name="hike[descent]" min="1" required value="<%= formData && formData.hike && formData.hike.descent ? formData.hike.descent : '' %>">
             <div class="input-group-text">m</div>
           </div>
           <div class="valid-feedback">Looks good!</div>
@@ -101,7 +105,7 @@
         <div class="mb-3">
           <label class="form-label" for="description">Description:</label>
           <textarea class="form-control" type="text" id="description" name="hike[description]" rows="5"
-            required></textarea>
+            required><%= formData && formData.hike && formData.hike.description ? formData.hike.description : '' %></textarea>
           <div class="invalid-feedback">Please add a description</div>
           <div class="valid-feedback">Looks good!</div>
         </div>
@@ -109,11 +113,11 @@
 
         <!-- Image(s) -->
         <div class="mb-3">
-          <label for="image" class="form-label">Upload Image(s):</label>
+          <label for="images" class="form-label">Upload Image(s) JPG or PNG:</label>
           <div class="form-file custom-file">
-            <input class="form-control custom-file-input" type="file" id="image" name="image"
+            <input class="form-control custom-file-input" type="file" id="images" name="images"
               accept="image/jpg, image/jpeg, image/png" multiple required>
-            <label for="image" class="form-label custom-file-label previewImage"></label>
+            <label for="images" class="form-label custom-file-label previewImage"></label>
           </div>
           <div id="formFile"></div>
         </div>
@@ -129,4 +133,4 @@
   </div>
 </div>
 
-<script src="/javascripts/selectedImageThumbnail.js"></script>
+<script defer src="/javascripts/selectedImageThumbnail.js"></script>

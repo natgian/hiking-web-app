@@ -8,6 +8,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const flash = require("connect-flash");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utilities/ExpressError");
@@ -19,7 +20,6 @@ const User = require("./models/user");
 const helmet = require("helmet");
 const catchAsync = require("./utilities/catchAsync");
 const hikes = require("./controllers/hikes");
-const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/SwitzerlandExplored";
 

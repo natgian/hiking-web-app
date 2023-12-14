@@ -70,6 +70,19 @@ body {
   padding: 0;
 }
 
+.ok-svg {
+  color: #1b8653;
+  display: block;
+  margin: auto;
+
+}
+
+.eyeIcon {
+  cursor: pointer;
+}
+
+
+
 /*-----------------*/
 /* UTILITY CLASSES */
 /*-----------------*/
@@ -102,7 +115,6 @@ body {
 .center {
   margin: auto;
 }
-
 
 #scrollToTopBtn {
   z-index: 1;
@@ -318,11 +330,14 @@ legend {
 /* MEDIA QUERIES */
 /*---------------*/
 
-@media (max-width: 600px) {
-  body {
-    background: hsl(150, 67%, 5%);
-  }
-}
+ @media (max-width: 600px) {
+ body {
+    /* background: hsl(150, 67%, 5%);
+     background: rgb(23, 23, 23);  */
+     background: #131615;
+
+  } 
+} 
 
 @media (max-width: 991.98px) {
   .heading {

@@ -18,11 +18,13 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 // middleware for JOI validation:
 module.exports.validateHike = (req, res, next) => {
+
   // JOI validation schema for backend validation on the server side
   const { error } = hikeSchema.validate(req.body);
   if (error) {
     const msg = error.details.map(el => el.message).join(",")
-    throw new ExpressError(msg, 400);
+    req.flash("error", msg);
+    return res.render("hikes/new", { formData: req.body, error: msg});
   } else {
     next();
   }

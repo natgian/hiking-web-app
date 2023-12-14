@@ -40,6 +40,21 @@ router.post("/login", checkReturnTo, passport.authenticate("local", { failureFla
 // LOGOUT
 router.get("/logout", users.logout);
 
+// RENDER FORGOT PASSWORD PAGE
+router.get("/forgot-password", users.renderForgotPassword);
+
+// -- SEND RESET PASSWORD EMAIL TO USER
+router.post("/forgot-password", catchAsync(users.sendResetPasswordEmail));
+
+// -- RENDER SENT MAIL PAGE
+router.get("/email-sent", users.renderSentMailConfirmation);
+
+// RENDER RESET PASSWORD PAGE
+router.get("/reset/:token", catchAsync(users.renderResetPassword));
+
+// RESET PASSWORD
+router.post("/reset/:token", catchAsync(users.resetPassword));
+
 // RENDER USER PROFILE PAGE
 router.get("/users/:id", users.profilePage);
 

@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
   <div class="row | mt-5 p-5 | bg-light-section">
-    <h2 class="text-center mb-5">Make your changes:</h2>
+    <h1 class="text-center mb-5">Make your changes:</h1>
     <div class="col-md-6 offset-md-3">
       <form action="/hikes/<%=hike._id%>?_method=PUT" method="POST" novalidate class="needs-validation"
         enctype="multipart/form-data">
@@ -126,7 +126,7 @@
 
         <div class="container mb-5">
           <div class="row">
-            <p>Current Image(s):</p>
+            <p>Current Image(s) JPG or PNG:</p>
             <% hike.images.forEach(function(img, i) { %>
 
             <div class="col-4">

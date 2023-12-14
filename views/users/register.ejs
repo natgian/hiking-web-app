@@ -5,7 +5,7 @@
     <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
       <div class="card shadow">
         <div class="card-body">
-          <h5 class="card-title mt-4 mb-4 h1 text-center mb-5">Sign Up</h5>
+          <h1 class="card-title mt-4 mb-4 h1 text-center mb-5">Sign Up</h1>
           <form action="/register" method="POST" class="needs-validation" id="signup_form" novalidate>
             <div class="mb-3">
               <label class="form-label" for="username">Username:</label>
@@ -26,17 +26,16 @@
             </div>
             <div class="mb-4">
               <label class="form-label" for="password">Password:</label>
-              <input class="form-control" type="text" id="password" name="password" required>
+              <div class="input-group">
+                <input class="form-control" type="password" id="password" name="password" required>
+                <span class="input-group-text eyeIcon" id="togglePassword"><img src="/images/eye-off-outline.svg" alt="eye icon" id="eyeIcon"></span>
+              </div>
               <div class="valid-feedback">
                 Looks good!
               </div>
             </div>
-            <!-- <div class="mb-4">
-              <label class="form-label" for="confirm_password">Confirm Password:</label>
-              <input class="form-control" type="password" id="confirm_password" name="confirm_password" required>
-            </div> -->
-            <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-success btn-block">Sign Up</button>
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn btn-success">Sign Up</button>
             </div>
           </form>
         </div>
@@ -45,8 +44,4 @@
   </div>
 </div>
 
-<!-- <script src="/javascripts/validatePassword.js"></script> -->
-<script>
-    const password = document.getElementById("password").value;
-  const confirm_password = document.getElementById("confirm_password").value;
-</script>
+<script defer src="/javascripts/togglePassword.js"></script>

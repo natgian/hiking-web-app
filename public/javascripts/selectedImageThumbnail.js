@@ -1,4 +1,4 @@
-const selectImageUpload = document.getElementById("image");
+const selectImageUpload = document.getElementById("images");
 const formFile = document.getElementById("formFile");
 
 selectImageUpload.addEventListener("change", (event) => {
@@ -8,7 +8,7 @@ selectImageUpload.addEventListener("change", (event) => {
       previews[i].parentNode.removeChild(previews[i]);
     }
   }
-  const images = document.getElementById("image");
+  const images = document.getElementById("images");
   const number = images.files.length;
   for (i = 0; i < number; i++) {
     const urls = URL.createObjectURL(event.target.files[i]);

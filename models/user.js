@@ -9,11 +9,16 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
-  password: String,
   email: {
     type: String,
     required: true,
     unique: true
+  },
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordExpires: {
+    type: Date,
   },
   isAdmin: {
     type: Boolean,

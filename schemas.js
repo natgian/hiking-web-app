@@ -34,14 +34,14 @@ module.exports.hikeSchema = Joi.object({
     distance: Joi.number().min(1).required(),
     location: Joi.string().required().escapeHTML(),
     finish: Joi.string().required().escapeHTML(),
-    images: Joi.string(),
     duration: Joi.number().required(),
     difficulty: Joi.string().required().escapeHTML(),
     ascent: Joi.number().required(),
     descent: Joi.number().required(),
-    description: Joi.string().required().escapeHTML()
+    description: Joi.string().required().escapeHTML(),
   }).required(),
-  deleteImages: Joi.array()
+    images: Joi.array().items(Joi.string()),
+    deleteImages: Joi.array()
 });
 
 module.exports.reviewSchema = Joi.object({
@@ -49,6 +49,13 @@ module.exports.reviewSchema = Joi.object({
     rating: Joi.number().required().min(1).max(5),
     body: Joi.string().required().escapeHTML()
   }).required()
+});
+
+module.exports.userEmailSchema = Joi.object({
+  email: Joi.string()
+    .email()
+    .required()
+    .escapeHTML()
 });
 
 

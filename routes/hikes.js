@@ -27,7 +27,7 @@ const upload = multer({ storage }) // executing the multer middleware
 router.get("/new", isLoggedIn, hikes.renderNewForm);
 
 // --CREATE NEW HIKE-- 
-router.post("/", isLoggedIn, upload.array("image"), validateHike, catchAsync(hikes.createHike));
+router.post("/", isLoggedIn, upload.array("images"), validateHike, catchAsync(hikes.createHike));
 
 // --RENDER SHOW PAGE FOR A HIKE
 router.get("/:id", catchAsync(hikes.showHike));
@@ -36,7 +36,7 @@ router.get("/:id", catchAsync(hikes.showHike));
 router.get("/:id/edit", isLoggedIn, isAuthor, catchAsync(hikes.renderEditForm));
 
 // --EDIT/UPDATE A HIKE
-router.put("/:id", isLoggedIn, isAuthor, upload.array("image"), validateHike, catchAsync(hikes.updateHike));
+router.put("/:id", isLoggedIn, isAuthor, upload.array("images"), validateHike, catchAsync(hikes.updateHike));
 
 // --DELETE A HIKE
 router.delete("/:id", isLoggedIn, isAuthor, catchAsync(hikes.deleteHike));
