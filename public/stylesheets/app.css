@@ -116,6 +116,14 @@ body {
   margin: auto;
 }
 
+.truncate-link {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 #scrollToTopBtn {
   z-index: 1;
   position: fixed;
@@ -234,7 +242,6 @@ body {
 /* IMAGES */
 /*--------*/
 
-/* Images Upload Preview */
 #logo-img {
   height: 125px;
 }
@@ -329,6 +336,12 @@ legend {
 /*---------------*/
 /* MEDIA QUERIES */
 /*---------------*/
+
+@media (max-width: 345px) {
+  #logo-img {
+    height: 100px;
+  }
+}
 
  @media (max-width: 600px) {
  body {

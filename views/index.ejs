@@ -1,9 +1,6 @@
 <% layout("./layouts/boilerplate") %>
 
 <div class="container">
-  <button id="scrollToTopBtn">
-    <svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 384 512"><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2l105.4 105.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>
-  </button>
   <div class="row g-4 mt-5">
 
     <!-- Header -->
@@ -14,7 +11,7 @@
 
   
     <div class=" flex mt-4">
-      <p class="center explainer mb-2">Double-click on a point on the map, browse through the different trails below or search for a specific trail by location, name or trail difficulty (T1-T6):
+      <p class="center explainer mb-2">Double-click on a point on the map, browse through the different hikes below or search for a specific hike by location, name or difficulty (T1-T6):
       </p>
     </div>
  
@@ -45,7 +42,7 @@
       <div class="card index-card | text-bg-light | overflow-hidden">
 
         <% if(hike.images.length){ %>
-        <img class="card-img-top index-images" src="<%=hike.images[0].url%>" alt="" crossorigin>
+        <img class="card-img-top index-images" src="<%=hike.images[0].url%>" alt="" loading="lazy" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33.3vw" crossorigin>
         <% } else { %>
         <img class="img-fluid index-images"
           src="/public/images/alpinehiking.png" alt="">
@@ -79,4 +76,3 @@
 
 
   <script defer src="/javascripts/clusterMap.js"></script>
-  <script defer src="/javascripts/cookies.js"></script>
