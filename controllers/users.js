@@ -7,11 +7,11 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
 // Middleware
-const {isLoggedIn } = require("../middleware");
+const { isLoggedIn } = require("../middleware");
 
 // --RENDER SIGN UP PAGE
 module.exports.renderRegister = (req, res) => {
-  res.render("users/register", {title: "Sign Up | Switzerland Explored", page_name: "register"});
+  res.render("users/register", { title: "Sign Up | Switzerland Explored", page_name: "register" });
 };
 
 // REGISTER NEW USER
@@ -36,7 +36,7 @@ module.exports.renderLogin = (req, res) => {
   if (req.query.returnTo) {
     req.session.returnTo = req.query.returnTo;
   }
-  res.render("users/login", {title: "Login | Switzerland Explored", page_name: "login"});
+  res.render("users/login", { title: "Login | Switzerland Explored", page_name: "login" });
 };
 
 // --LOGIN
@@ -72,16 +72,16 @@ module.exports.renderSentMailConfirmation = (req, res) => {
 module.exports.sendResetPasswordEmail = async (req, res, next) => {
   const { error } = userEmailSchema.validate(req.body); // Validate the email input
   if (error) {
-    req.flash("error", "Please enter a valid e-mail address..");
+    req.flash("error", "Please enter a valid email address..");
     return res.redirect("/forgot-password");
     // return res.render("pages/error", { err: error.details[0].message });
   };
 
   const user = await User.findOne({ email: req.body.email }); // Find the user by email
-    if(!user) {
-      req.flash("error", "No user found with this e-mail.");
-      return res.redirect("/forgot-password");
-    }
+  if (!user) {
+    req.flash("error", "No user found with this email.");
+    return res.redirect("/forgot-password");
+  }
 
   const resetToken = crypto.randomBytes(32).toString("hex"); // Generate a reset token
   user.resetPasswordToken = resetToken; // Set the reset token in the user's document
@@ -103,9 +103,9 @@ module.exports.sendResetPasswordEmail = async (req, res, next) => {
     to: user.email,
     subject: "SwitzerlandExplored - Reset password",
     text: `You are receiving this message because a password reset has been requested for your account on SwitzerlandExplored.\n\n` +
-    `Please click on the following link or paste it into your browser to complete the process:\n\n` +
-    `http://${req.headers.host}/reset/${resetToken}\n\n` +
-    `If you have not requested this, please ignore this e-mail and your password will remain unchanged.\n`
+      `Please click on the following link or paste it into your browser to complete the process:\n\n` +
+      `http://${req.headers.host}/reset/${resetToken}\n\n` +
+      `If you have not requested this, please ignore this email and your password will remain unchanged.\n`
   };
 
   await transporter.sendMail(mailOptions);
@@ -117,7 +117,7 @@ module.exports.sendResetPasswordEmail = async (req, res, next) => {
 module.exports.renderResetPassword = async (req, res, next) => {
   const user = await User.findOne({
     resetPasswordToken: req.params.token,
-    resetPasswordExpires: { $gt: Date.now()},
+    resetPasswordExpires: { $gt: Date.now() },
   }).exec();
 
   if (!user) {
@@ -125,7 +125,7 @@ module.exports.renderResetPassword = async (req, res, next) => {
     return res.redirect("/forgot-password");
   };
 
-  res.render("users/resetPassword", {token: req.params.token });
+  res.render("users/resetPassword", { token: req.params.token });
 };
 
 // -- RESET THE PASSWORD
@@ -165,51 +165,51 @@ module.exports.resetPassword = async (req, res, next) => {
         return res.redirect(`/reset/${req.params.token}`);
       }
 
-       // Redirect to the user's profile or any desired location
-       req.flash("success", "Your password has been successfully reset.");
-       return res.redirect("/");
+      // Redirect to the user's profile or any desired location
+      req.flash("success", "Your password has been successfully reset.");
+      return res.redirect("/");
     });
   });
 };
 
 // --RENDER AUTHOR PROFILE PAGE
-module.exports.profilePage = (req, res) => {
-  User.findById(req.params.id, function (err, foundUser) {
-    if (err) {
-      req.flash("error", "Something went wrong.");
-      return res.redirect("/");
-    }
-    Hike.find().where("author").equals(foundUser._id).exec(function (err, hikes) {
-      if (err) {
-        req.flash("error", "Something went wrong.");
-        return res.redirect("/");
-      }
-      res.render("users/profile", { user: foundUser, hikes: hikes, title: "Profile | Switzerland Explored", page_name: "profile" });
-    })
+module.exports.profilePage = async (req, res) => {
+  const foundUser = await User.findById(req.params.id);
+  const hikes = await Hike.find().where("author").equals(foundUser._id);
+
+  if (!foundUser) {
+    req.flash("error", "User not found.");
+    return res.redirect("/");
+  };
+
+  // Ensure that each hike.images is an array with at least one element
+  hikes.forEach((hike) => {
+    hike.images = hike.images && hike.images.length > 0 ? hike.images : [{ url: '/images/no-image.svg', filename: 'no-image' }];
   });
+
+  res.render("users/profile", { user: foundUser, hikes: hikes, title: "Profile | Switzerland Explored", page_name: "profile" });
 };
 
-// --RENDER CURRENT USER PROFILE PAGE
-module.exports.currentUserPage = (req, res) => {
-  User.findById(req.user.id, function(err, currentUser) {
-  if (err) {
-    req.flash("error", "Something went wrong.");
-    return res.redirect("/");
-  }
-  Hike.find().where("author").equals(currentUser._id).exec(function (err, hikes) {
+// --RENDER LOGGED IN USER PROFILE PAGE
+module.exports.currentUserPage = async (req, res) => {
+  // Render user's profile page
+  User.findById(req.user.id, async function (err, currentUser) {
     if (err) {
       req.flash("error", "Something went wrong.");
       return res.redirect("/");
-    }
-  Bookmark.find().where("user").equals(currentUser._id).exec(function (err, bookmarks) {
-    if (err) {
-      req.flash("error", "Something went wrong.");
-      return res.redirect("/");
-    }
-  res.render("users/myprofile", { user: currentUser, hikes: hikes, bookmarks: bookmarks, title: "My Profile | Switzerland Explored", page_name: "myprofile" });
-})
-})
-})
+    };
+
+    const hikes = await Hike.find().where("author").equals(currentUser._id).exec();
+
+    // Ensure that each hike.images is an array with at least one element
+    hikes.forEach((hike) => {
+      hike.images = hike.images && hike.images.length > 0 ? hike.images : [{ url: '/images/no-image.svg', filename: 'no-image' }];
+    });
+
+    const bookmarks = await Bookmark.find().where("user").equals(currentUser._id).exec();
+
+    res.render("users/myprofile", { user: currentUser, hikes: hikes, bookmarks: bookmarks, title: "My Profile | Switzerland Explored", page_name: "myprofile" });
+  });
 };
 
 

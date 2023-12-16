@@ -4,12 +4,8 @@
   <div class="row | mt-5 p-5 | bg-light-section">
 
     <div class="col-md-8 offset-md-2">
-      <h1 class="mb-5">Create a new trail</h1>
+      <h1 class="mb-5">Create a new hike:</h1>
       <form action="/hikes" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-
-        <% if (error) { %>
-          <p><%= error %></p>
-        <% } %>
 
         <!-- Title -->
         <div class="mb-3">

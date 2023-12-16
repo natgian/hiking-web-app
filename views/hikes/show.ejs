@@ -42,11 +42,11 @@
           <tbody>
             <tr>
               <th class="ps-0" scope="row">Starting Location:</th>
-              <td><%=hike.location%></td>
+              <td><%=hike.location.charAt(0).toUpperCase() + hike.location.slice(1)%></td>
             </tr>
             <tr>
               <th class="ps-0" scope="row">Ending Location:</th>
-              <td><%=hike.finish%></td>
+              <td><%=hike.finish.charAt(0).toUpperCase() + hike.location.slice(1)%></td>
             </tr>
             <tr>
               <th class="ps-0" scope="row">Difficulty:</th>

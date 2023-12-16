@@ -56,10 +56,10 @@ router.get("/reset/:token", catchAsync(users.renderResetPassword));
 router.post("/reset/:token", catchAsync(users.resetPassword));
 
 // RENDER USER PROFILE PAGE
-router.get("/users/:id", users.profilePage);
+router.get("/users/:id", catchAsync(users.profilePage));
 
 // RENDER MYPROFILE PAGE
-router.get("/myprofile", isLoggedIn, users.currentUserPage);
+router.get("/myprofile", isLoggedIn, catchAsync(users.currentUserPage));
 
 
 module.exports = router;

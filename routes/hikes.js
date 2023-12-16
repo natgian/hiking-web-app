@@ -14,7 +14,7 @@ const hikes = require("../controllers/hikes");
 // Middleware
 const { isLoggedIn } = require("../middleware"); // middleware to check if logged in
 const { isAuthor } = require("../middleware"); // middleware to check if authorized
-const { validateHike } = require("../middleware"); // middleware for JOI validation
+const { validateHike, validateEditHike } = require("../middleware"); // middleware for JOI validation
 const multer = require('multer'); // middleware for handling multipart/form-data to upload files(images for example)
 const { storage } = require("../cloudinary"); // requiring the CloudinaryStorage - variable "storage"
 const upload = multer({ storage }) // executing the multer middleware
@@ -36,7 +36,7 @@ router.get("/:id", catchAsync(hikes.showHike));
 router.get("/:id/edit", isLoggedIn, isAuthor, catchAsync(hikes.renderEditForm));
 
 // --EDIT/UPDATE A HIKE
-router.put("/:id", isLoggedIn, isAuthor, upload.array("images"), validateHike, catchAsync(hikes.updateHike));
+router.put("/:id", isLoggedIn, isAuthor, upload.array("images"), catchAsync(hikes.updateHike));
 
 // --DELETE A HIKE
 router.delete("/:id", isLoggedIn, isAuthor, catchAsync(hikes.deleteHike));

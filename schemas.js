@@ -40,8 +40,8 @@ module.exports.hikeSchema = Joi.object({
     descent: Joi.number().required(),
     description: Joi.string().required().escapeHTML(),
   }).required(),
-    images: Joi.array().items(Joi.string()),
-    deleteImages: Joi.array()
+    images: Joi.array().items(Joi.object({url: Joi.string().required(), filename: Joi.string().required()})),
+    deleteImages: Joi.array().items(Joi.string())
 });
 
 module.exports.reviewSchema = Joi.object({

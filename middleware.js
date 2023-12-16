@@ -1,4 +1,4 @@
-const { hikeSchema } = require("./schemas");
+const { hikeSchema, editHikeSchema } = require("./schemas");
 const { reviewSchema } = require("./schemas.js");
 const ExpressError = require("./utilities/ExpressError");
 const Hike = require("./models/hike");
@@ -16,11 +16,11 @@ module.exports.isLoggedIn = (req, res, next) => {
   next();
 };
 
-// middleware for JOI validation:
+// middleware for Hike JOI validation:
 module.exports.validateHike = (req, res, next) => {
-
   // JOI validation schema for backend validation on the server side
   const { error } = hikeSchema.validate(req.body);
+
   if (error) {
     const msg = error.details.map(el => el.message).join(",")
     req.flash("error", msg);
@@ -28,6 +28,22 @@ module.exports.validateHike = (req, res, next) => {
   } else {
     next();
   }
+};
+
+// middleware to handle vlidation for editing a hike
+module.exports.validateEditHike = (req, res, next) => {
+  // JOI validation schema for backend validation on the server side
+  const { error } = hikeSchema.validate(req.body);
+   // Check if there are uploaded images
+   const hasImages = req.files && req.files.length > 0;
+
+   if (error || (!hasImages && !req.body.deleteImages)) {
+    const errorMsg = error ? error.details.map(el => el.message).join(",") : "At least one image is required.";
+    req.flash("error", errorMsg);
+    return res.redirect(`/hikes/${req.params.id}/edit`);
+  } else {
+    next();
+  };
 };
 
 // middleware to authorize user to edit/delete etc.:
