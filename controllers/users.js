@@ -212,4 +212,39 @@ module.exports.currentUserPage = async (req, res) => {
   });
 };
 
+// --RENDER CHANGE PASSWORD PAGE
+module.exports.renderChangePassword = (req, res) => {
+  res.render("users/changePassword");
+};
+
+// -- CHANGE PASSWORD
+module.exports.changePassword = async (req, res, next) => {
+  const userId = req.user._id;
+
+  if (!userId) {
+    req.flash("error", "User not found.");
+    return res.redirect("/");
+  };
+
+  const foundUser = await User.findById(userId);
+
+  if (!foundUser) {
+    req.flash("error", "User not found.");
+    return res.redirect("/");
+  };
+
+  foundUser.authenticate(req.body.currentPassword, async (err, valid) => {
+    if (err || !valid) {
+      req.flash("error", "The current password is not correct.");
+      return res.redirect("/myprofile");
+    };
+
+    foundUser.setPassword(req.body.newPassword, async () => {
+      await foundUser.save();
+      req.flash("success", "Password has been successfully changed.");
+       res.redirect("/myprofile");
+    });  
+  });
+};
+
 

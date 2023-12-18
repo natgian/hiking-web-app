@@ -128,20 +128,19 @@ module.exports.updateHike = async (req, res, next) => {
   // Update the hike document with the new information
   hike.set({ ...req.body.hike });
 
-  // deleting selected images from MongoDB:
-  if (req.body.deleteImages) {
-    // deleting selected images from Cloudinary:
-    console.log("Deleting images:", req.body.deleteImages);
-    for (let filename of req.body.deleteImages) {
-      await cloudinary.uploader.destroy(filename);
-    }
-    await hike.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } });
-  };
-
   // If new images are uploaded, push them to the images array
   if (newImages.length > 0) {
     hike.images = [...hike.images, ...newImages];
   };
+
+    // deleting selected images from MongoDB:
+    if (req.body.deleteImages) {
+      // deleting selected images from Cloudinary:
+      for (let filename of req.body.deleteImages) {
+        await cloudinary.uploader.destroy(filename);
+      }
+      await hike.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } });
+    };
 
   // Ensure hike.images is an array with at least one default image
   hike.images = hike.images && hike.images.length > 0 ? hike.images : [{ url: '/images/no-image.svg', filename: 'no-image' }];

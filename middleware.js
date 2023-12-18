@@ -1,9 +1,8 @@
-const { hikeSchema, editHikeSchema } = require("./schemas");
+const { hikeSchema } = require("./schemas");
 const { reviewSchema } = require("./schemas.js");
 const ExpressError = require("./utilities/ExpressError");
 const Hike = require("./models/hike");
 const Review = require("./models/review");
-const Bookmark = require("./models/bookmark");
 
 // middleware to check if logged in:
 module.exports.isLoggedIn = (req, res, next) => {

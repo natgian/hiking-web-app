@@ -61,6 +61,10 @@ router.get("/users/:id", catchAsync(users.profilePage));
 // RENDER MYPROFILE PAGE
 router.get("/myprofile", isLoggedIn, catchAsync(users.currentUserPage));
 
+// RENDER CHANGE PASSWORD PAGE
+router.get("/myprofile/change-password", isLoggedIn, users.renderChangePassword);
+
+router.post("/myprofile/change-password", isLoggedIn, catchAsync(users.changePassword));
 
 module.exports = router;
 
