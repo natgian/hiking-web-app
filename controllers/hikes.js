@@ -1,5 +1,6 @@
 // Models
 const Hike = require("../models/hike");
+const User = require("../models/user");
 const { cloudinary } = require("../cloudinary");
 
 // Mapbox - requiring an passing in the token
@@ -77,6 +78,9 @@ module.exports.createHike = async (req, res, next) => {
 
 // RENDER SHOW PAGE FOR A HIKE
 module.exports.showHike = async (req, res) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
   const hike = await Hike.findById(req.params.id).populate({
     path: "reviews",
     populate: {
@@ -88,13 +92,15 @@ module.exports.showHike = async (req, res) => {
     req.flash("error", "Hike not found!");
     return res.redirect("/");
   };
-
      // Ensure that hike.images is an array with at least one element
      hike.images = hike.images && hike.images.length > 0
      ? hike.images
      : [{ url: '/images/no-image.svg', filename: 'no-image' }];
+
+  // Check if the hike is bookmarked by the current user
+  const isBookmarked = user.bookmarks.some(bookmark => bookmark.equals(hike._id));
      
-  res.render("hikes/show", { hike, title: "Trail details | Switzerland Explored", page_name: "show" });
+  res.render("hikes/show", { hike, title: "Trail details | Switzerland Explored", page_name: "show", isBookmarked });
 };
 
 // RENDER PAGE TO EDIT A HIKE
