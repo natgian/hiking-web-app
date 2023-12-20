@@ -16,6 +16,7 @@ const methodOverride = require("method-override");
 const passport = require("passport");
 const passportLocal = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
+const nodemailer = require("nodemailer");
 const User = require("./models/user");
 const helmet = require("helmet");
 const catchAsync = require("./utilities/catchAsync");
@@ -183,16 +184,46 @@ app.use("/bookmarks", bookmarkRoutes);
 // GENERAL ROUTES
 // - Home -
 app.get("/", catchAsync(hikes.index));
+
 // - Explore - 
 app.get("/search", catchAsync(hikes.search));
+
 // - Info -
 app.get("/information", (req, res) => {
   res.render("information", {title: "Hiking information | Switzerland Explored", page_name: "information"});
 });
+
 // - Contact -
 app.get("/contact", (req, res) => {
   res.render("contact", {title: "Contact | Switzerland Explored", page_name: "contact"});
 });
+app.get("/message-sent", (req, res) => {
+  res.render("messageSent", {title: "Contact | Switzerland Explored", page_name: "contact"});
+});
+app.post("/contact", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    host: "mail.infomaniak.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PW
+    }
+  });  
+
+  const mailOptions = {
+    from: "info@natgian.com",
+    to: "info@natgian.com",
+    subject: `SwitzerlandExplored - Nachricht von ${name}`,
+    text: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:\n\n ${subject}\n\n ${message}`
+  };
+
+  await transporter.sendMail(mailOptions);
+  res.redirect("/message-sent");
+});
+
 // - Privacy Policy - 
 app.get("/privacypolicy", (req, res) => {
   res.render("privacypolicy", {title: "Privacy Policy | Switzerland Explored", page_name: "privacypolicy"});
