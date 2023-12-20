@@ -78,8 +78,9 @@ module.exports.createHike = async (req, res, next) => {
 
 // RENDER SHOW PAGE FOR A HIKE
 module.exports.showHike = async (req, res) => {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
+  const userId = req.user ? req.user._id : null;
+  // If the user is authenticated, fetch the user details
+  const user = userId ? await User.findById(userId) : null;
 
   const hike = await Hike.findById(req.params.id).populate({
     path: "reviews",
@@ -98,7 +99,7 @@ module.exports.showHike = async (req, res) => {
      : [{ url: '/images/no-image.svg', filename: 'no-image' }];
 
   // Check if the hike is bookmarked by the current user
-  const isBookmarked = user.bookmarks.some(bookmark => bookmark.equals(hike._id));
+  const isBookmarked = userId && user && user.bookmarks.some(bookmark => bookmark.equals(hike._id));
      
   res.render("hikes/show", { hike, title: "Trail details | Switzerland Explored", page_name: "show", isBookmarked });
 };
