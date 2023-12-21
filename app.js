@@ -217,7 +217,8 @@ app.post("/contact", async (req, res) => {
     from: "info@natgian.com",
     to: "info@natgian.com",
     subject: `SwitzerlandExplored - Nachricht von ${name}`,
-    text: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:\n\n ${subject}\n\n ${message}`
+    text: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:\n\n ${subject}\n\n ${message}`,
+    html: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:<br><br> <strong>${subject}</strong><br><br> ${message}`
   };
 
   await transporter.sendMail(mailOptions);
