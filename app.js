@@ -1,7 +1,7 @@
 // If we are in developer mode require "dotenv", otherwise don't
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
-};
+}
 
 const express = require("express");
 const app = express();
@@ -22,7 +22,8 @@ const helmet = require("helmet");
 const catchAsync = require("./utilities/catchAsync");
 const hikes = require("./controllers/hikes");
 const MongoStore = require("connect-mongo");
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/SwitzerlandExplored";
+const dbUrl =
+  process.env.DB_URL || "mongodb://localhost:27017/SwitzerlandExplored";
 
 // MongoDB Sanitizer (for security)
 const mongoSanitize = require("express-mongo-sanitize");
@@ -34,12 +35,12 @@ const userRoutes = require("./routes/users");
 const bookmarkRoutes = require("./routes/bookmarks");
 
 // connecting to MongoDB
-mongoose.set('strictQuery', false);
-main().catch(err => console.log(err));
+mongoose.set("strictQuery", false);
+main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(dbUrl);
   console.log("DATABASE CONNECTED!");
-};
+}
 
 // setting up ejs-mate
 app.engine("ejs", ejsMate);
@@ -57,20 +58,20 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
 // telling express to sanitize, to remove data using $ and . characters in req.body/req.params/req.query/req.headers
-app.use(mongoSanitize({replaceWith: "_"}));
+app.use(mongoSanitize({ replaceWith: "_" }));
 
-const secret = process.env.SECRET || "thisshouldbeabettersecret!";
+const secret = process.env.SECRET || "thisshouldbeabettersecret!";
 
 // setting up session
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   touchAfter: 24 * 60 * 60,
   crypto: {
-    secret: secret
-  }
+    secret: secret,
+  },
 });
 
-store.on("error", function(e){
+store.on("error", function (e) {
   console.log("SESSION STORE ERROR", e);
 });
 
@@ -85,8 +86,8 @@ const sessionConfig = {
     // "secure: true" can only be used with https, otherwise it will break the code if you use it on localhost, so comment it out only when you deploy the project
     // secure: true;
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    maxAge: 1000 * 60 * 60 * 24 * 7
-  }
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
 };
 app.use(session(sessionConfig));
 
@@ -105,7 +106,7 @@ const scriptSrcUrls = [
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net",
   "https://res.cloudinary.com/natgian/",
-  "https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js.map"
+  "https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js.map",
 ];
 const styleSrcUrls = [
   "https://cdn.jsdelivr.net",
@@ -130,7 +131,7 @@ const connectSrcUrls = [
   "https://images.unsplash.com/",
   "https://ka-f.fontawesome.com/",
   "https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js.map",
-  "https://formspree.io/f/maykawwn"
+  "https://formspree.io/f/maykawwn",
 ];
 const fontSrcUrls = [
   "https://fonts.gstatic.com",
@@ -139,23 +140,23 @@ const fontSrcUrls = [
 
 app.use(
   helmet.contentSecurityPolicy({
-      directives: {
-          defaultSrc: [],
-          connectSrc: ["'self'", ...connectSrcUrls],
-          scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-          styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-          workerSrc: ["'self'", "blob:"],
-          objectSrc: [],
-          imgSrc: [
-              "'self'",
-              "blob:",
-              "data:",
-              "https://res.cloudinary.com/natgian/",
-              "https://images.unsplash.com/",
-          ],
-          fontSrc: ["'self'", ...fontSrcUrls],
-          manifestSrc: ["'self'"]       
-      }
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/natgian/",
+        "https://images.unsplash.com/",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+      manifestSrc: ["'self'"],
+    },
   })
 );
 
@@ -185,55 +186,70 @@ app.use("/bookmarks", bookmarkRoutes);
 // - Home -
 app.get("/", catchAsync(hikes.index));
 
-// - Explore - 
+// - Explore -
 app.get("/search", catchAsync(hikes.search));
 
 // - Info -
 app.get("/information", (req, res) => {
-  res.render("information", {title: "Hiking information | Switzerland Explored", page_name: "information"});
+  res.render("information", {
+    title: "Hiking information | Switzerland Explored",
+    page_name: "information",
+  });
 });
 
 // - Contact -
 app.get("/contact", (req, res) => {
-  res.render("contact", {title: "Contact | Switzerland Explored", page_name: "contact"});
+  res.render("contact", {
+    title: "Contact | Switzerland Explored",
+    page_name: "contact",
+  });
 });
 app.get("/message-sent", (req, res) => {
-  res.render("messageSent", {title: "Contact | Switzerland Explored", page_name: "contact"});
+  res.render("messageSent", {
+    title: "Contact | Switzerland Explored",
+    page_name: "contact",
+  });
 });
 app.post("/contact", async (req, res) => {
   const { name, email, subject, message } = req.body;
 
   const transporter = nodemailer.createTransport({
-    host: "mail.infomaniak.com",
+    host: process.env.EMAIL_HOST,
     port: 465,
     secure: true,
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PW
-    }
-  });  
+      pass: process.env.EMAIL_PW,
+    },
+  });
 
   const mailOptions = {
-    from: "info@natgian.com",
-    to: "info@natgian.com",
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
     subject: `SwitzerlandExplored - Nachricht von ${name}`,
     text: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:\n\n ${subject}\n\n ${message}`,
-    html: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:<br><br> <strong>${subject}</strong><br><br> ${message}`
+    html: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:<br><br> <strong>${subject}</strong><br><br> ${message}`,
   };
 
   await transporter.sendMail(mailOptions);
   res.redirect("/message-sent");
 });
 
-// - Privacy Policy - 
+// - Privacy Policy -
 app.get("/privacypolicy", (req, res) => {
-  res.render("privacypolicy", {title: "Privacy Policy | Switzerland Explored", page_name: "privacypolicy"});
+  res.render("privacypolicy", {
+    title: "Privacy Policy | Switzerland Explored",
+    page_name: "privacypolicy",
+  });
 });
 
 // 404 PAGE NOT FOUND HANDLER (all = for every request / * = for every path)
 app.all("*", (req, res, next) => {
   // next(new ExpressError("Page Not Found", 404));
-  res.render("pagenotfound", {title: "Page Not Found | Switzerland Explored", page_name: "pagenotfound"});
+  res.render("pagenotfound", {
+    title: "Page Not Found | Switzerland Explored",
+    page_name: "pagenotfound",
+  });
 });
 
 // Error Handler

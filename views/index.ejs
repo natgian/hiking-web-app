@@ -2,50 +2,85 @@
 
 <div class="container">
   <div class="row g-4 mt-5">
-
     <!-- Header -->
     <div class="heading flex">
-      <h1 class="center col-12 align-items-center header-text1 animate__animated animate__fadeInLeft">
-        Mountains, hills, lakes, waterfalls, rivers or glaciers, Switzerland has it all! <span class="header-text2 m-0 animate__animated animate__fadeIn animate__delay-2s animate__slow">Start exploring now.</span></h1>
+      <h1
+        class="center col-12 align-items-center header-text1 animate__animated animate__fadeInLeft"
+      >
+        Mountains, hills, lakes, waterfalls, rivers or glaciers, Switzerland has
+        it all!
+        <span
+          class="header-text2 m-0 animate__animated animate__fadeIn animate__delay-2s animate__slow"
+          >Start exploring now.</span
+        >
+      </h1>
     </div>
 
-  
-    <div class=" flex mt-4">
-      <p class="center explainer mb-2">Double-click on a point on the map, browse through the different hikes below or search for a specific hike by location, name or difficulty (T1-T6):
+    <div class="flex mt-4">
+      <p class="center explainer mb-2">
+        Double-click on a point on the map, browse through the different hikes
+        below or search for a specific hike by location, name or difficulty
+        (T1-T6):
       </p>
     </div>
- 
-            <!-- Search -->
-            <div> 
-              <div class="col-lg-6 offset-lg-3 col-12 mb-3">
-              <form method="GET" action="/" class="input-group" >
-                <input class="form-control" type="text" name="search" id="search" placeholder="Search by name, location or difficulty..." aria-label="search">
-                <button class="btn btn-success" type="submit">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0c.41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z"/></svg>
-                </button>
-                </form>
-              </div>
-            </div>
-   
-    <!-- Cluster Map -->
-    
-       <div id="cluster-map"></div>
 
-       <div class="d-flex justify-content-center m-0">
-        <button id="fit" class="btn btn-secondary btn-sm mb-3">Center map</button>
+    <!-- Search -->
+    <div>
+      <div class="col-lg-6 offset-lg-3 col-12 mb-3">
+        <form method="GET" action="/" class="input-group">
+          <input
+            class="form-control"
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search by name, location or difficulty..."
+            aria-label="search"
+          />
+          <button class="btn btn-success" type="submit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0c.41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z"
+              />
+            </svg>
+          </button>
+        </form>
       </div>
-    
+    </div>
+
+    <!-- Cluster Map -->
+
+    <div id="cluster-map"></div>
+
+    <div class="d-flex justify-content-center m-0">
+      <button id="fit" class="btn btn-secondary btn-sm mb-3">Center map</button>
+    </div>
 
     <!-- Cards -->
     <% for (let hike of hikes) { %>
     <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
       <div class="card index-card | text-bg-light | overflow-hidden">
-
         <% if(hike.images.length){ %>
-        <img class="card-img-top index-images" src="<%=hike.images[0].url%>" alt="" loading="lazy" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33.3vw" crossorigin>
+        <img
+          class="card-img-top index-images"
+          src="<%=hike.images[0].url%>"
+          alt=""
+          loading="lazy"
+          sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33.3vw"
+          crossorigin
+        />
         <% } else { %>
-        <img class="img-fluid index-images"
-          src="/public/images/alpinehiking.png" alt="">
+        <img
+          class="img-fluid index-images"
+          src="/public/images/alpinehiking.png"
+          alt=""
+        />
         <% } %>
 
         <div class="card-body d-flex flex-column">
@@ -54,23 +89,45 @@
             <small class="text-muted"><%=hike.location%></small>
           </p>
           <p class="card-text">
-            <small class="text-muted">&#11108; <%=hike.distance%> km</small>&nbsp;&nbsp;
-            <small class="text-muted">&#128337; <%=hike.duration%> h</small>&nbsp;&nbsp;
-            <small class="text-muted">&#9650; <%=hike.ascent%> m</small>&nbsp;&nbsp;
-            <small class="text-muted"><svg xmlns="http://www.w3.org/2000/svg" style="vertical-align: -0.125em;" width="0.75em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 384 512"><path fill="currentColor" d="M288 48c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zm-44.7 182.7L224.2 307l49.7 49.7c9 9 14.1 21.2 14.1 33.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32v-82.7l-73.9-73.9c-15.8-15.8-22.2-38.6-16.9-60.3l20.4-84c8.3-34.1 42.7-54.9 76.7-46.4c19 4.8 35.6 16.4 46.4 32.7l28.4 42.6H336v-24c0-13.3 10.7-24 24-24s24 10.7 24 24v304c0 13.3-10.7 24-24 24s-24-10.7-24-24V272h-39.4c-16 0-31-8-39.9-21.4l-13.3-20zM81.1 471.9L117.3 334c3 4.2 6.4 8.2 10.1 11.9l41.9 41.9l-26.4 100.3c-4.5 17.1-22 27.3-39.1 22.8s-27.3-22-22.8-39.1zm55.5-346l-35.2 140.6c-3 12.1-14.9 19.9-27.2 17.9l-47.9-8c-14-2.3-22.9-16.3-19.2-30L31.9 155c9.5-34.8 41.1-59 77.2-59h4.2c15.6 0 27.1 14.7 23.3 29.8z"/></svg> <%=hike.difficulty.substring(0, 2)%></small>
+            <small class="text-muted">&#11108; <%=hike.distance%> km</small
+            >&nbsp;&nbsp;
+            <small class="text-muted">&#128337; <%=hike.duration%> h</small
+            >&nbsp;&nbsp;
+            <small class="text-muted">&#9650; <%=hike.ascent%> m</small
+            >&nbsp;&nbsp;
+            <small class="text-muted"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                style="vertical-align: -0.125em"
+                width="0.75em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 384 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M288 48c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zm-44.7 182.7L224.2 307l49.7 49.7c9 9 14.1 21.2 14.1 33.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32v-82.7l-73.9-73.9c-15.8-15.8-22.2-38.6-16.9-60.3l20.4-84c8.3-34.1 42.7-54.9 76.7-46.4c19 4.8 35.6 16.4 46.4 32.7l28.4 42.6H336v-24c0-13.3 10.7-24 24-24s24 10.7 24 24v304c0 13.3-10.7 24-24 24s-24-10.7-24-24V272h-39.4c-16 0-31-8-39.9-21.4l-13.3-20zM81.1 471.9L117.3 334c3 4.2 6.4 8.2 10.1 11.9l41.9 41.9l-26.4 100.3c-4.5 17.1-22 27.3-39.1 22.8s-27.3-22-22.8-39.1zm55.5-346l-35.2 140.6c-3 12.1-14.9 19.9-27.2 17.9l-47.9-8c-14-2.3-22.9-16.3-19.2-30L31.9 155c9.5-34.8 41.1-59 77.2-59h4.2c15.6 0 27.1 14.7 23.3 29.8z"
+                />
+              </svg>
+              <%=hike.difficulty.substring(0, 2)%></small
+            >
           </p>
-          <p class="card-text fs-6 text fw-normal"><%=hike.description.substring(0, 150)%>...</p>
-          <a href="/hikes/<%=hike._id%>" class="btn btn-sm btn-success mt-auto">Read more</a>
-
+          <p class="card-text fs-6 text fw-normal">
+            <%=hike.description.substring(0, 150)%>...
+          </p>
+          <a href="/hikes/<%=hike._id%>" class="btn btn-sm btn-success mt-auto"
+            >Read more</a
+          >
         </div>
       </div>
     </div>
     <% } %>
 
-   
-  <script defer >
-    const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
-    const hikes = { features: <%-JSON.stringify(hikes) %> }
-  </script>
+    <script defer>
+      const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+      const hikes = { features: <%-JSON.stringify(hikes) %> }
+    </script>
 
-  <script defer src="/javascripts/clusterMap.js"></script>
+    <script defer src="/javascripts/clusterMap.js"></script>
+  </div>
+</div>
