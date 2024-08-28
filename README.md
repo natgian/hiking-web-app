@@ -23,7 +23,7 @@
 
 ## Installation
 
-To get a loca copy of the project up and running, follow these steps:
+To get a local copy of the project up and running, follow these steps:
 
 1. clone the repository
 2. install the dependencies: `npm install`
