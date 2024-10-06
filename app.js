@@ -80,13 +80,13 @@ const sessionConfig = {
   name: "session",
   secret: secret,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     httpOnly: true,
     // "secure: true" can only be used with https, otherwise it will break the code if you use it on localhost, so comment it out only when you deploy the project
     // secure: true;
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 12),
+    maxAge: 1000 * 60 * 60 * 4,
   },
 };
 app.use(session(sessionConfig));
