@@ -84,7 +84,7 @@ const sessionConfig = {
   cookie: {
     httpOnly: true,
     // "secure: true" can only be used with https, otherwise it will break the code if you use it on localhost, so comment it out only when you deploy the project
-    // secure: true;
+    secure: true,
     expires: new Date(Date.now() + 1000 * 60 * 60 * 12),
     maxAge: 1000 * 60 * 60 * 4,
   },
