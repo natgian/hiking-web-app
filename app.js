@@ -232,8 +232,17 @@ app.post("/contact", async (req, res) => {
     html: `Es wurde folgende Nachricht von ${email} über das Kontaktformular gesendet:<br><br> <strong>${subject}</strong><br><br> ${message}`,
   };
 
-  await transporter.sendMail(mailOptions);
-  res.redirect("/message-sent");
+  try {
+    await transporter.sendMail(mailOptions);
+    res.redirect("/message-sent");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res
+      .status(500)
+      .send(
+        "An error occurred while sending the email. Please try again later."
+      );
+  }
 });
 
 // - Privacy Policy -
