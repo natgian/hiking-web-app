@@ -22,8 +22,9 @@ const helmet = require("helmet");
 const catchAsync = require("./utilities/catchAsync");
 const hikes = require("./controllers/hikes");
 const MongoStore = require("connect-mongo");
-const dbUrl =
-  process.env.DB_URL || "mongodb://localhost:27017/SwitzerlandExplored";
+const dbUrl = process.env.DB_URL;
+// const dbUrl =
+//   process.env.DB_URL || "mongodb://localhost:27017/SwitzerlandExplored";
 
 // MongoDB Sanitizer (for security)
 const mongoSanitize = require("express-mongo-sanitize");
