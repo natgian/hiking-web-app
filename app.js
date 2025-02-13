@@ -43,6 +43,9 @@ async function main() {
   console.log("DATABASE CONNECTED!");
 }
 
+// Express configuration to trust the first proxy server
+app.set("trust proxy", 1); // trust first proxy
+
 // setting up ejs-mate
 app.engine("ejs", ejsMate);
 // setting up ejs
@@ -85,7 +88,7 @@ const sessionConfig = {
   cookie: {
     httpOnly: true,
     // "secure: true" can only be used with https, otherwise it will break the code if you use it on localhost, so comment it out only when you deploy the project
-    secure: false,
+    secure: true,
     expires: new Date(Date.now() + 1000 * 60 * 60 * 12),
     maxAge: 1000 * 60 * 60 * 4,
   },
