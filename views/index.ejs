@@ -4,13 +4,9 @@
   <div class="row g-4 mt-5">
     <!-- Header -->
     <div class="heading flex">
-      <h1
-        class="center col-12 align-items-center header-text1 animate__animated animate__fadeInLeft"
-      >
-        Mountains, hills, lakes, waterfalls, rivers or glaciers, Switzerland has
-        it all!
-        <span
-          class="header-text2 m-0 animate__animated animate__fadeIn animate__delay-2s animate__slow"
+      <h1 class="center col-12 align-items-center header-text1 animate__animated animate__fadeInLeft">
+        Mountains, hills, lakes, waterfalls, rivers or glaciers, Switzerland has it all!
+        <span class="header-text2 m-0 animate__animated animate__fadeIn animate__delay-2s animate__slow"
           >Start exploring now.</span
         >
       </h1>
@@ -18,9 +14,8 @@
 
     <div class="flex mt-4">
       <p class="center explainer mb-2">
-        Double-click on a point on the map, browse through the different hikes
-        below or search for a specific hike by location, name or difficulty
-        (T1-T6):
+        Double-click on a point on the map, browse through the different hikes below or search for a specific hike by
+        location, name or difficulty (T1-T6):
       </p>
     </div>
 
@@ -76,11 +71,7 @@
           crossorigin
         />
         <% } else { %>
-        <img
-          class="img-fluid index-images"
-          src="/public/images/alpinehiking.png"
-          alt=""
-        />
+        <img class="img-fluid index-images" src="/public/images/alpinehiking.png" alt="" />
         <% } %>
 
         <div class="card-body d-flex flex-column">
@@ -89,12 +80,9 @@
             <small class="text-muted"><%=hike.location%></small>
           </p>
           <p class="card-text">
-            <small class="text-muted">&#11108; <%=hike.distance%> km</small
-            >&nbsp;&nbsp;
-            <small class="text-muted">&#128337; <%=hike.duration%> h</small
-            >&nbsp;&nbsp;
-            <small class="text-muted">&#9650; <%=hike.ascent%> m</small
-            >&nbsp;&nbsp;
+            <small class="text-muted">&#11108; <%=hike.distance%> km</small>&nbsp;&nbsp;
+            <small class="text-muted">&#128337; <%=hike.duration%> h</small>&nbsp;&nbsp;
+            <small class="text-muted">&#9650; <%=hike.ascent%> m</small>&nbsp;&nbsp;
             <small class="text-muted"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -112,12 +100,8 @@
               <%=hike.difficulty.substring(0, 2)%></small
             >
           </p>
-          <p class="card-text fs-6 text fw-normal">
-            <%=hike.description.substring(0, 150)%>...
-          </p>
-          <a href="/hikes/<%=hike._id%>" class="btn btn-sm btn-success mt-auto"
-            >Read more</a
-          >
+          <p class="card-text fs-6 text fw-normal"><%=hike.description.substring(0, 150)%>...</p>
+          <a href="/hikes/<%=hike._id%>" class="btn btn-sm btn-success mt-auto">Read more</a>
         </div>
       </div>
     </div>

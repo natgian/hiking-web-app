@@ -85,7 +85,7 @@ const sessionConfig = {
   cookie: {
     httpOnly: true,
     // "secure: true" can only be used with https, otherwise it will break the code if you use it on localhost, so comment it out only when you deploy the project
-    secure: true,
+    secure: false,
     expires: new Date(Date.now() + 1000 * 60 * 60 * 12),
     maxAge: 1000 * 60 * 60 * 4,
   },
@@ -134,10 +134,7 @@ const connectSrcUrls = [
   "https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js.map",
   "https://formspree.io/f/maykawwn",
 ];
-const fontSrcUrls = [
-  "https://fonts.gstatic.com",
-  "https://ka-f.fontawesome.com/",
-];
+const fontSrcUrls = ["https://fonts.gstatic.com", "https://ka-f.fontawesome.com/"];
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -148,13 +145,7 @@ app.use(
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
       workerSrc: ["'self'", "blob:"],
       objectSrc: [],
-      imgSrc: [
-        "'self'",
-        "blob:",
-        "data:",
-        "https://res.cloudinary.com/natgian/",
-        "https://images.unsplash.com/",
-      ],
+      imgSrc: ["'self'", "blob:", "data:", "https://res.cloudinary.com/natgian/", "https://images.unsplash.com/"],
       fontSrc: ["'self'", ...fontSrcUrls],
       manifestSrc: ["'self'"],
     },
@@ -237,11 +228,7 @@ app.post("/contact", async (req, res) => {
     res.redirect("/message-sent");
   } catch (error) {
     console.error("Error sending email:", error);
-    res
-      .status(500)
-      .send(
-        "An error occurred while sending the email. Please try again later."
-      );
+    res.status(500).send("An error occurred while sending the email. Please try again later.");
   }
 });
 
