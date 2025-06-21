@@ -17,9 +17,11 @@ const nodemailer = require("nodemailer");
 const User = require("./models/user");
 const helmet = require("helmet");
 const catchAsync = require("./utilities/catchAsync");
+const verifyTurnstile = require("./utilities/verifyTurnstile");
 const hikes = require("./controllers/hikes");
 const MongoStore = require("connect-mongo");
 const dbUrl = process.env.DB_URL;
+const siteKey = process.env.CLOUDFLARE_SITE_KEY;
 
 // MongoDB Sanitizer (for security)
 const mongoSanitize = require("express-mongo-sanitize");
@@ -97,42 +99,43 @@ app.use(flash());
 app.use(helmet());
 
 const scriptSrcUrls = [
-  "https://stackpath.bootstrapcdn.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://api.mapbox.com/",
-  "https://kit.fontawesome.com/",
-  "https://ka-f.fontawesome.com/",
-  "https://cdnjs.cloudflare.com/",
+  "https://stackpath.bootstrapcdn.com",
+  "https://api.tiles.mapbox.com",
+  "https://api.mapbox.com",
+  "https://kit.fontawesome.com",
+  "https://ka-f.fontawesome.com",
+  "https://cdnjs.cloudflare.com",
   "https://cdn.jsdelivr.net",
   "https://res.cloudinary.com/natgian/",
-  "https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js.map",
+  "https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js.map",
+  "https://challenges.cloudflare.com",
 ];
 const styleSrcUrls = [
   "https://cdn.jsdelivr.net",
-  "https://kit-free.fontawesome.com/",
-  "https://stackpath.bootstrapcdn.com/",
+  "https://kit-free.fontawesome.com",
+  "https://stackpath.bootstrapcdn.com",
   "https://api.mapbox.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://fonts.googleapis.com/",
-  "https://use.fontawesome.com/",
-  "https://ka-f.fontawesome.com/",
-  "https://res.cloudinary.com/natgian/",
-  "https://cdn.jsdelivr.net/",
+  "https://api.tiles.mapbox.com",
+  "https://fonts.googleapis.com",
+  "https://use.fontawesome.com",
+  "https://ka-f.fontawesome.com",
+  "https://res.cloudinary.com/natgian",
+  "https://cdn.jsdelivr.net",
   "https://fonts.googleapis.com",
   "https://fonts.gstatic.com",
   "https://cdnjs.cloudflare.com",
 ];
 const connectSrcUrls = [
   "https://*.tiles.mapbox.com",
-  "https://api.mapbox.com/",
-  "https://events.mapbox.com/",
+  "https://api.mapbox.com",
+  "https://events.mapbox.com",
   "https://res.cloudinary.com/natgian/",
-  "https://images.unsplash.com/",
-  "https://ka-f.fontawesome.com/",
-  "https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js.map",
+  "https://images.unsplash.com",
+  "https://ka-f.fontawesome.com",
+  "https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js.map",
   "https://formspree.io/f/maykawwn",
 ];
-const fontSrcUrls = ["https://fonts.gstatic.com", "https://ka-f.fontawesome.com/"];
+const fontSrcUrls = ["https://fonts.gstatic.com", "https://ka-f.fontawesome.com"];
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -143,9 +146,11 @@ app.use(
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
       workerSrc: ["'self'", "blob:"],
       objectSrc: [],
-      imgSrc: ["'self'", "blob:", "data:", "https://res.cloudinary.com/natgian/", "https://images.unsplash.com/"],
+      imgSrc: ["'self'", "blob:", "data:", "https://res.cloudinary.com/natgian/", "https://images.unsplash.com"],
       fontSrc: ["'self'", ...fontSrcUrls],
       manifestSrc: ["'self'"],
+      frameSrc: ["https://challenges.cloudflare.com"],
+      childSrc: ["https://challenges.cloudflare.com"],
     },
   })
 );
@@ -192,6 +197,7 @@ app.get("/contact", (req, res) => {
   res.render("contact", {
     title: "Contact | Switzerland Explored",
     page_name: "contact",
+    site_key: siteKey,
   });
 });
 app.get("/message-sent", (req, res) => {
@@ -201,7 +207,8 @@ app.get("/message-sent", (req, res) => {
   });
 });
 app.post("/contact", async (req, res) => {
-  const { name, email, subject, message } = req.body;
+  const { name, email, subject, message, "cf-turnstile-response": token } = req.body;
+  const ip = req.headers["cf-connecting-ip"];
 
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -222,11 +229,16 @@ app.post("/contact", async (req, res) => {
   };
 
   try {
+    await verifyTurnstile(token, ip);
     await transporter.sendMail(mailOptions);
     res.redirect("/message-sent");
   } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).send("An error occurred while sending the email. Please try again later.");
+    if (error.message === "Captcha failed" || error.message === "Error during captcha validation") {
+      res.status(400).send("Captcha validation failed. Please try again.");
+    } else {
+      console.error("Error sending email:", error);
+      res.status(500).send("An error occurred while sending the email. Please try again later.");
+    }
   }
 });
 

@@ -3,6 +3,7 @@
 // https://account.mapbox.com
 mapboxgl.config.EVENTS_URL = null;
 mapboxgl.accessToken = mapToken;
+// mapboxgl.setTelemetryEnabled(false);
 
 const map = new mapboxgl.Map({
   container: "cluster-map",
