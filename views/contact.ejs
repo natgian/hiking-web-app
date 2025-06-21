@@ -1,7 +1,7 @@
 <% layout("./layouts/boilerplate") %>
 
 <div class="container-fluid">
-  <div class="row justify-content-center | mt-5 pt-5 p-3 | bg-light-section">
+  <div class="row justify-content-center | pt-5 p-3 | bg-light-section">
     <div class="col-10 col-md-8 col-lg-6">
       <form action="/contact" method="POST" class="contact-form">
         <h1>Contact</h1>
@@ -26,7 +26,7 @@
           <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Your message..." required></textarea>
         </div>
 
-        <div class="cf-turnstile" data-sitekey="<%= site_key %>"></div>
+        <div class="cf-turnstile" id="turnstile-container" data-sitekey="<%= site_key %>" data-size="normal" data-language="auto" data-theme="light"></div>
 
         <div class="mt-4 d-grid gap-2 mb-5">
           <input type="submit" value="Send Message" class="btn btn-success btn-block" />

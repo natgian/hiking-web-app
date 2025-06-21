@@ -17,8 +17,8 @@
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -56,13 +56,12 @@ svg {
 
 body {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("/images/bgMountains.jpg") no-repeat center center fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/images/bgMountains.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 #explore {
@@ -74,11 +73,15 @@ body {
   color: #1b8653;
   display: block;
   margin: auto;
-
 }
 
 .eyeIcon {
   cursor: pointer;
+}
+
+#turnstile-container {
+  display: flex;
+  justify-content: center;
 }
 
 /*-----------------*/
@@ -203,7 +206,6 @@ body {
   display: none;
 }
 
-
 /*---------------------*/
 /* NAVIGATION & FOOTER */
 /*---------------------*/
@@ -232,9 +234,7 @@ body {
   font-size: 1rem;
   font-weight: 300;
   padding: 0;
-  ;
 }
-
 
 /*--------*/
 /* IMAGES */
@@ -341,14 +341,19 @@ legend {
   }
 }
 
- @media (max-width: 600px) {
- body {
+@media (max-width: 500px) {
+  #turnstile-container {
+    scale: 0.8;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
     /* background: hsl(150, 67%, 5%);
      background: rgb(23, 23, 23);  */
-     background: #131615;
-
-  } 
-} 
+    background: #131615;
+  }
+}
 
 @media (max-width: 991.98px) {
   .heading {
@@ -406,4 +411,3 @@ legend {
     font-size: 1rem;
   }
 }
-
