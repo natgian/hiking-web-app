@@ -234,10 +234,13 @@ app.post("/contact", async (req, res) => {
     res.redirect("/message-sent");
   } catch (error) {
     if (error.message === "Captcha failed" || error.message === "Error during captcha validation") {
-      res.status(400).send("Captcha validation failed. Please try again.");
+      console.error("Captcha validation failed:", error);
+      req.flash("error", "Captcha validation failed. Please try again.");
+      return res.redirect("/contact");
     } else {
       console.error("Error sending email:", error);
-      res.status(500).send("An error occurred while sending the email. Please try again later.");
+      req.flash("error", "An error occurred while sending the email. Please try again later.");
+      return res.redirect("/contact");
     }
   }
 });

@@ -9,32 +9,27 @@
           <form action="/register" method="POST" class="needs-validation" id="signup_form" novalidate>
             <div class="mb-3">
               <label class="form-label" for="username">Username:</label>
-              <input class="form-control" type="text" id="username" name="username" autofocus required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <input class="form-control" type="text" id="username" name="username" autofocus required />
+              <div class="valid-feedback">Looks good!</div>
             </div>
             <div class="mb-3">
               <label class="form-label" for="email">Email:</label>
-              <input class="form-control" type="email" id="email" name="email" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-              <div class="invalid-feedback">
-                Please enter a valid email adddress.
-              </div>
+              <input class="form-control" type="email" id="email" name="email" required />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please enter a valid email adddress.</div>
             </div>
             <div class="mb-4">
               <label class="form-label" for="password">Password:</label>
               <div class="input-group">
-                <input class="form-control password-input" type="password" id="password" name="password" required>
-                <span class="input-group-text togglePassword"><img src="/images/eye-off-outline.svg" alt="eye icon" class="eyeIcon"></span>
+                <input class="form-control password-input" type="password" id="password" name="password" required />
+                <span class="input-group-text togglePassword"><img src="/images/eye-off-outline.svg" alt="eye icon" class="eyeIcon" /></span>
               </div>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <div class="valid-feedback">Looks good!</div>
             </div>
-            <div class="d-grid mb-4">
+
+            <div class="cf-turnstile" id="turnstile-container" data-sitekey="<%= site_key %>" data-size="normal" data-language="auto" data-theme="light"></div>
+
+            <div class="d-grid mb-4 mt-4">
               <button type="submit" class="btn btn-success">Sign Up</button>
             </div>
           </form>
