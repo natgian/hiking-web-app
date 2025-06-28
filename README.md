@@ -39,6 +39,8 @@ EMAIL_USER=your_email
 EMAIL_PW=your_email_password
 EMAIL_HOST=your_email_host
 SECRET=your_secret
+CLOUDFLARE_SITE_KEY=your_site_key
+CLOUDFLARE_SECRET_KEY=your_secret_key
 ```
 
 I used Cloudinary for image storage and Mapbox for the maps.
